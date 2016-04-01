@@ -4,12 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
+
+    <!-- Anchor dummy View for the buttons-->
+    <View
+        android:id="@+id/navigationView_buttons_anchor"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:background="@drawable/step_bar_gradient_background"
+        android:layout_alignParentBottom="true" />
+
     <com.anton46.stepsview.StepsView
         android:id="@+id/stepsView"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
 
+    <!--PREVIOUS button-->
     <Button
         android:id="@+id/navigationView_previous_button"
         android:text="@string/navigationView_previous_button_text"
@@ -18,22 +29,20 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorTextDark"
         android:background="@android:color/transparent"
+        android:layout_marginLeft="16dp"
         android:layout_alignParentLeft="true"
-        android:layout_above="@id/stepsView"/>
+        android:layout_above="@id/navigationView_buttons_anchor"/>
 
-
+    <!--NEXT button-->
     <Button
         android:id="@+id/navigationView_next_button"
-        android:text="@string/signin_next_button_text"
+        android:text="@string/next_button_text"
         android:textSize="@dimen/button_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorTextDark"
         android:background="@android:color/transparent"
         android:layout_alignParentRight="true"
-        android:layout_above="@id/stepsView"/>
-
-
-
+        android:layout_above="@id/navigationView_buttons_anchor"/>
 
 </merge>

@@ -64,7 +64,7 @@
         <Button
             android:id="@+id/next_activity_choose_month"
             android:onClick="goToFirstCallActivity"
-            android:text="@string/next_capitals"
+            android:text="@string/next_button_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"

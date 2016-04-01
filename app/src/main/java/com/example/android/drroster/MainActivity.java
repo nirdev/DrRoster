@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.drroster.Signin.SigninActivity;
 import com.example.android.drroster.Signin.SigninConstants;
+import com.example.android.drroster.activities.GenerateRosterActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Go to choose month activity //TODO:Delete after finish build sign in
-        Intent i1 = new Intent(this,SigninActivity.class );
+        Intent i1 = new Intent(this,GenerateRosterActivity.class );
         startActivity(i1);
 
         //Retrieve string from sharedPreference

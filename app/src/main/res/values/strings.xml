@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">DrRoster</string>
     <string name="department_name_hint">Department name</string>
-    <string name="signin_next_button_text">start</string>
+    <string name="next_button_text">NEXT</string>
     <string name="pick_month_button_text">Choose Month</string>
     <string name="choose_month_dialog_button">OK</string>
-    <string name="next_capitals">NEXT</string>
     <string name="ChooseMonthActivityBarTitle">Month</string>
     <string name="FirsCallActivityBarTitle">1st Call</string>
     <string name="navigationView_previous_button_text">PREVIOUS</string>
