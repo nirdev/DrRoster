@@ -20,6 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="@color/title"
+        android:textColor="@color/colorTitleWhite"
         android:textSize="25sp" />
 </android.support.v7.widget.Toolbar>

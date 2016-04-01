@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Signin.SigninActivity"></activity>
+        <activity android:name=".Signin.SigninActivity" />
+        <activity android:name=".activities.GenerateRosterActivity" />
+        <activity android:name=".activities.ChooseMonthActivity"></activity>
     </application>
 
 </manifest>
