@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitys.ChooseMonthActivity"
+    android:orientation="vertical">
+
+
+    <!--calendarViewShown="false" sets spinner view for api below 21-->
+    <!--android:datePickerMode="spinner" sets spinner view for api above and 21-->
+    <DatePicker
+        android:id="@+id/datepicker_sinner"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:endYear="2100"
+        android:startYear="2016"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    </DatePicker>
+    <Button
+        android:id="@+id/choose_moth_dialog_button"
+        android:text="@string/choose_month_dialog_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextDark"
+        android:background="@android:color/transparent"
+        android:textSize="@dimen/button_text_size"/>
+
+</LinearLayout>
