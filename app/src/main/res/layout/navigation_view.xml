@@ -10,7 +10,7 @@
     <View
         android:id="@+id/navigationView_buttons_anchor"
         android:layout_width="match_parent"
-        android:layout_height="39dp"
+        android:layout_height="50dp"
         android:background="@drawable/step_bar_gradient_background"
         android:layout_alignParentBottom="true" />
 
