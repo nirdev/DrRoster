@@ -7,4 +7,7 @@
     <string name="ChooseMonthActivityBarTitle">Month</string>
     <string name="FirsCallActivityBarTitle">1st Call</string>
     <string name="navigationView_previous_button_text">PREVIOUS</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

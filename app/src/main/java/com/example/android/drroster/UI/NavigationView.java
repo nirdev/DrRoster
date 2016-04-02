@@ -15,7 +15,6 @@ import com.example.android.drroster.activities.GenerateRosterActivity;
  */
 public class NavigationView extends RelativeLayout {
 
-
     //Navigation buttons
     private Button mPreviousButton;
     private Button mNextButton;
@@ -25,19 +24,21 @@ public class NavigationView extends RelativeLayout {
     //Index of stepBar & fragment
     private int mSelectedIndex = -1;
 
-    public NavigationView(Context context) {
-        super(context);
-        initializeViews(context);
-    }
-
+    //Constructor @pram attrs is android default attrs
     public NavigationView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initializeViews(context);
     }
 
-    public NavigationView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initializeViews(context);
+    //Interface to set call back to the activity on fragment change
+    public interface IFragmentChangeListener {
+        public void onFragmentChange(int index);
+    }
+
+    private IFragmentChangeListener fragmentChangeListener;
+
+    public void setFragmentChangeListener(IFragmentChangeListener listener){
+        this.fragmentChangeListener = listener;
     }
 
     private void initializeViews(Context context) {
@@ -51,20 +52,9 @@ public class NavigationView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-
-
         //find step bar in view
         mStepBarView  = (StepBarView) findViewById(R.id.step_bar_view);
-//        //Customize stepBar
-//        String[] labelsArray = {" ", " "," "," "," "," "," "};
-//        mStepsView = (StepsView) findViewById(R.id.stepsView);
-//        mStepsView.setLabels(labelsArray) //Length == number of steps
-//                .setBarColorIndicator(this.getResources().getColor(R.color.colorTitleWhite)) // Bar color
-//                .setProgressColorIndicator(this.getResources().getColor(R.color.colorTextDark)).drawView(); // Progress on the bar color
-//
 
-
-        // When the previous button is pressed, select the previous value in the list.
         mPreviousButton = (Button) this.findViewById(R.id.navigationView_previous_button);
         mPreviousButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
@@ -96,6 +86,11 @@ public class NavigationView extends RelativeLayout {
      */
     public void setSelectedIndex(int index) {
 
+
+        if (fragmentChangeListener != null){
+            fragmentChangeListener.onFragmentChange(index);
+        }
+
         // Set the current index and display the value.
         mSelectedIndex = index;
 
@@ -117,6 +112,5 @@ public class NavigationView extends RelativeLayout {
             mNextButton.setVisibility(VISIBLE);
         }
     }
-
-
 }
+
