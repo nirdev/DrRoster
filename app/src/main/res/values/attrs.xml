@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StepBarView">
+        <attr name="normalDotColor" format="color"/>
+        <attr name="boldDotColor" format="color"/>
+        <attr name="numberOfDots" format="integer"/>
+    </declare-styleable>
+</resources>

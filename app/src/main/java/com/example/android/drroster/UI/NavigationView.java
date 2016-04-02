@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.anton46.stepsview.StepsView;
 import com.example.android.drroster.R;
 import com.example.android.drroster.activities.GenerateRosterActivity;
 
@@ -22,7 +21,7 @@ public class NavigationView extends RelativeLayout {
     private Button mNextButton;
 
     //stepBar
-    private StepsView mStepsView;
+    private StepBarView mStepBarView;
     //Index of stepBar & fragment
     private int mSelectedIndex = -1;
 
@@ -54,13 +53,15 @@ public class NavigationView extends RelativeLayout {
 
 
 
-        //Customize stepBar
-        String[] labelsArray = {" ", " "," "," "," "," "," "};
-        mStepsView = (StepsView) findViewById(R.id.stepsView);
-        mStepsView.setLabels(labelsArray) //Length == number of steps
-                .setBarColorIndicator(this.getResources().getColor(R.color.colorTitleWhite)) // Bar color
-                .setProgressColorIndicator(this.getResources().getColor(R.color.colorTextDark)).drawView(); // Progress on the bar color
-
+        //find step bar in view
+        mStepBarView  = (StepBarView) findViewById(R.id.step_bar_view);
+//        //Customize stepBar
+//        String[] labelsArray = {" ", " "," "," "," "," "," "};
+//        mStepsView = (StepsView) findViewById(R.id.stepsView);
+//        mStepsView.setLabels(labelsArray) //Length == number of steps
+//                .setBarColorIndicator(this.getResources().getColor(R.color.colorTitleWhite)) // Bar color
+//                .setProgressColorIndicator(this.getResources().getColor(R.color.colorTextDark)).drawView(); // Progress on the bar color
+//
 
 
         // When the previous button is pressed, select the previous value in the list.
@@ -99,20 +100,22 @@ public class NavigationView extends RelativeLayout {
         mSelectedIndex = index;
 
         //Customize stepBar
-       mStepsView.setCompletedPosition(index).drawView();
-
+        mStepBarView.setBoldDot (index);
 
         // If the first value is shown, hide the previous button.
-        if (mSelectedIndex == 0)
+        if (mSelectedIndex == 0) {
             mPreviousButton.setVisibility(INVISIBLE);
-        else
+        }
+        else {
             mPreviousButton.setVisibility(VISIBLE);
-
+        }
         // If the last value is shown, hide the next button.
-        if (mSelectedIndex ==  GenerateRosterActivity.GENERATOR_FRAGMENTS_NUMBER - 1)
+        if (mSelectedIndex ==  GenerateRosterActivity.GENERATOR_FRAGMENTS_NUMBER - 1) {
             mNextButton.setVisibility(INVISIBLE);
-        else
+        }
+        else {
             mNextButton.setVisibility(VISIBLE);
+        }
     }
 
 

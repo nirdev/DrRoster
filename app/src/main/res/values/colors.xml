@@ -7,4 +7,5 @@
     <color name="colorTitleWhite">#ffffff</color>
     <color name="colorPrimaryStatusBarDark">#196278</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="colorAlmostWhite">#d0cdce</color>
 </resources>
