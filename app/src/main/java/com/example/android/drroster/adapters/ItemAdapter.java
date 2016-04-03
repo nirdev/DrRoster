@@ -4,10 +4,12 @@ import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.drroster.R;
+import com.example.android.drroster.fragments.FirstCallFragment;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.ArrayList;
@@ -48,12 +50,34 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
     }
 
     public class ViewHolder extends DragItemAdapter<Pair<Long, String>, ItemAdapter.ViewHolder>.ViewHolder {
-        public TextView mText;
+        public EditText mText;
 
         public ViewHolder(final View itemView) {
             super(itemView, mGrabHandleId);
-            mText = (TextView) itemView.findViewById(R.id.text);
+            mText = (EditText) itemView.findViewById(R.id.text);
+
+            //Delete Button was clicked
+            ImageButton mDeleteImageButton = (ImageButton) itemView.findViewById(R.id.delete_draggable_item);
+            mDeleteImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                   //Check which index was selected by comparing to edit text
+                    int i = 0;
+                    for (Pair temp  : FirstCallFragment.mItemArray){
+                        if( temp.second.equals(""+mText.getText())){
+                            break;
+                        }
+                        i++;
+                    }
+                    FirstCallFragment.mItemArray.remove(i);
+                    notifyDataSetChanged();
+                }
+            });
         }
+
+
+
 
         @Override
         public void onItemClicked(View view) {

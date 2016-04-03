@@ -26,7 +26,6 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackgroundWhite"
         android:layout_above="@id/navigationView_buttons_anchor">
 
     <!--PREVIOUS button-->

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class FirstCallFragment extends Fragment {
 
-    private ArrayList<Pair<Long, String>> mItemArray;
+    public static ArrayList<Pair<Long, String>> mItemArray;
     private DragListView mDragListView;
 
     View view;
@@ -52,9 +52,11 @@ public class FirstCallFragment extends Fragment {
         });
 
 
+        //TODO: take from database
         mItemArray = new ArrayList<>();
         for (int i = 0; i < 40; i++) {
             mItemArray.add(new Pair<>(Long.valueOf(i), "Item " + i));
+
         }
 
 
@@ -62,7 +64,7 @@ public class FirstCallFragment extends Fragment {
         return view;
     }
 
-    private void setupListRecyclerView() {
+    public void setupListRecyclerView() {
         mDragListView.setLayoutManager(new LinearLayoutManager(getContext()));
         ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.draggable_list_item, R.id.image, false);
         mDragListView.setAdapter(listAdapter, true);
