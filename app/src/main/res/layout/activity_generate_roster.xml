@@ -13,11 +13,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"/>
 
+    <View
+        android:id="@+id/anchor_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentBottom="true"/>
+
     <FrameLayout
         android:id="@+id/fragment_place_holder_generate_roster"
         android:layout_below="@id/toolbar_rostergen_rostergeneratoractivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/anchor_navigation_view"/>
 
     <com.example.android.drroster.UI.NavigationView
         android:id="@+id/navigation_view"

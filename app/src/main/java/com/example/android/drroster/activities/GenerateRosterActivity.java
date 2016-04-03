@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.android.drroster.R;
 import com.example.android.drroster.UI.NavigationView;
 import com.example.android.drroster.fragments.ChooseMonthFragment;
-import com.example.android.drroster.fragments.DraggableListFragment;
+import com.example.android.drroster.fragments.FirstCallFragment;
 
 public class GenerateRosterActivity extends AppCompatActivity {
 
@@ -44,7 +44,7 @@ public class GenerateRosterActivity extends AppCompatActivity {
                             ft.replace(R.id.fragment_place_holder_generate_roster, new ChooseMonthFragment());
                             break;
                         case FRAGMENT_PEOPLE_LIST_FIRST_CALL_INDEX:
-                            ft.replace(R.id.fragment_place_holder_generate_roster, new DraggableListFragment());
+                            ft.replace(R.id.fragment_place_holder_generate_roster, new FirstCallFragment());
                             break;
                     }
                     // replace

@@ -8,4 +8,6 @@
     <color name="colorPrimaryStatusBarDark">#196278</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorAlmostWhite">#d0cdce</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBackgroundWhite">#FFFAFAFA</color>
 </resources>

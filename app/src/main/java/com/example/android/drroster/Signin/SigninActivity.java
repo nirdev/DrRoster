@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.drroster.R;
+import com.example.android.drroster.activities.GenerateRosterActivity;
 
 
 public class SigninActivity extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class SigninActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), editText.getText() + " is saved", Toast.LENGTH_SHORT).show();
 
             //Go to choose month activity
-            Intent i = new Intent(this, ChooseMonthActivity.class);
+            Intent i = new Intent(this, GenerateRosterActivity.class);
             startActivity(i);
         }
         else {
