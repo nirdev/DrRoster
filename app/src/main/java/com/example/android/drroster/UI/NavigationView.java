@@ -105,7 +105,7 @@ public class NavigationView extends RelativeLayout {
             mPreviousButton.setVisibility(VISIBLE);
         }
         // If the last value is shown, hide the next button.
-        if (mSelectedIndex ==  GenerateRosterActivity.GENERATOR_FRAGMENTS_NUMBER - 1) {
+        if (mSelectedIndex ==  GenerateRosterActivity.GENERATOR_FRAGMENTS_NUMBER - 1 ) {
             mNextButton.setVisibility(INVISIBLE);
         }
         else {

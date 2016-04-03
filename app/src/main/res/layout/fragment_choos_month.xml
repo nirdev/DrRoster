@@ -1,13 +1,41 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ChooseMonthFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <Button
+        android:id="@+id/pick_month_dialog_button_fg"
+        android:text="@string/pick_month_button_text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextDark"
+        android:background="@android:color/transparent"
+        android:textSize="@dimen/button_text_size" />
 
-</FrameLayout>
+    <!--Horizontal line-->
+    <View
+        android:id="@+id/horizontal_line_choose_moth_fg"
+        android:layout_below="@id/pick_month_dialog_button_fg"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/colorTextDark" />
+
+    <TextView
+        android:id="@+id/choosed_month_textview"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/horizontal_line_choose_moth_fg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="@dimen/textview_title_big"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorTextDark"/>
+
+</RelativeLayout>

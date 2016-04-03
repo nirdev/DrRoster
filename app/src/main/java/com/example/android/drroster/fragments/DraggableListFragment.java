@@ -14,6 +14,7 @@ public class DraggableListFragment extends Fragment {
     public DraggableListFragment() {
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

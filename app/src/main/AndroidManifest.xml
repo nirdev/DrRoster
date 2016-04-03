@@ -17,7 +17,6 @@
         </activity>
         <activity android:name=".Signin.SigninActivity" />
         <activity android:name=".activities.GenerateRosterActivity" />
-        <activity android:name=".activities.ChooseMonthActivity"></activity>
     </application>
 
 </manifest>
