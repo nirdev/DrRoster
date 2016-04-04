@@ -9,13 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.android.drroster.R;
 import com.example.android.drroster.UI.NavigationView;
 import com.example.android.drroster.fragments.ChooseMonthFragment;
-import com.example.android.drroster.fragments.FirstCallFragment;
+import com.example.android.drroster.fragments.DraggableListFragment;
 
 public class GenerateRosterActivity extends AppCompatActivity {
 
     public static final int GENERATOR_FRAGMENTS_NUMBER = 7;
     public static final int FRAGMENT_CHOOSE_MONTH_INDEX = 0;
     public static final int FRAGMENT_PEOPLE_LIST_FIRST_CALL_INDEX = 1;
+    public static final int FRAGMENT_DATEABLE_LIST_INDEX = 5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +41,20 @@ public class GenerateRosterActivity extends AppCompatActivity {
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     switch (index){
+
                         case FRAGMENT_CHOOSE_MONTH_INDEX:
-                            ft.replace(R.id.fragment_place_holder_generate_roster, new ChooseMonthFragment());
+                            ft.replace(R.id.fragment_place_holder_generate_roster,
+                                    new ChooseMonthFragment());
                             break;
+
                         case FRAGMENT_PEOPLE_LIST_FIRST_CALL_INDEX:
-                            ft.replace(R.id.fragment_place_holder_generate_roster, new FirstCallFragment(),"TAG HERE");
+                            ft.replace(R.id.fragment_place_holder_generate_roster,
+                                    new DraggableListFragment(),FRAGMENT_PEOPLE_LIST_FIRST_CALL_INDEX + "");
                             break;
-                        case 2:
-                            ft.replace(R.id.fragment_place_holder_generate_roster, new FirstCallFragment(),"TAG HERE 2");
+
+                        case FRAGMENT_DATEABLE_LIST_INDEX:
+                            ft.replace(R.id.fragment_place_holder_generate_roster,
+                                    new DraggableListFragment(),FRAGMENT_DATEABLE_LIST_INDEX + "");
                             break;
                     }
                     // replace

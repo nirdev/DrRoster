@@ -5,30 +5,47 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.drroster.R;
-import com.example.android.drroster.adapters.ItemAdapter;
+import com.example.android.drroster.activities.GenerateRosterActivity;
+import com.example.android.drroster.adapters.ItemDragListAdapter;
 import com.woxthebox.draglistview.DragItem;
 import com.woxthebox.draglistview.DragListView;
 
 import java.util.ArrayList;
 
-public class FirstCallFragment extends Fragment {
+public class DraggableListFragment extends Fragment {
 
     public static ArrayList<Pair<Long, String>> mItemArray;
     public static ArrayList<Boolean> mCheckedArray;
     private DragListView mDragListView;
+    private boolean pickDateOption;
 
     View view;
-    public FirstCallFragment() {
-        // Required empty public constructor
+    public DraggableListFragment() {
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Log.wtf("here", "tag: " + getTag());
+        //Sets default prefs based on the fragment tag from GenerateRosterActivity
+        switch (getTag()){
+            case (GenerateRosterActivity.FRAGMENT_DATEABLE_LIST_INDEX + ""):
+                pickDateOption = true;
+                break;
+            default:
+                pickDateOption = false;
+                break;
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,19 +53,19 @@ public class FirstCallFragment extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_first_call, container, false);
 
+
+
         mDragListView = (DragListView) view.findViewById(R.id.drag_list_view_first_call);
         mDragListView.getRecyclerView().setVerticalScrollBarEnabled(true);
+
         //Todo:Delete when finish list
         mDragListView.setDragListListener(new DragListView.DragListListener() {
             @Override
             public void onItemDragStarted(int position) {
-                Toast.makeText(mDragListView.getContext(), "Start - position: " + position, Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onItemDragEnded(int fromPosition, int toPosition) {
                 if (fromPosition != toPosition) {
-                    Toast.makeText(mDragListView.getContext(), "End - position: " + toPosition, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -60,23 +77,19 @@ public class FirstCallFragment extends Fragment {
             mItemArray.add(new Pair<>(Long.valueOf(i), "Item " + i));
             mCheckedArray.add(false);
         }
-
-
-
         setupListRecyclerView();
         return view;
     }
 
     @Override
     public void onDestroyView() {
-
-       //TODo: handel DB here with gettag() - check this is best practice place to handle db in fragment life cycle
+        //TODo: handel DB here with gettag() - check this is best practice place to handle db in fragment life cycle
         super.onDestroyView();
     }
 
     public void setupListRecyclerView() {
         mDragListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.list_item_draggable, R.id.image, false);
+        ItemDragListAdapter listAdapter = new ItemDragListAdapter(mItemArray, R.layout.list_item_draggable, R.id.image, false,pickDateOption);
         mDragListView.setAdapter(listAdapter, true);
         mDragListView.setCanDragHorizontally(false);
         mDragListView.setCustomDragItem(new MyDragItem(getContext(), R.layout.list_item_draggable));

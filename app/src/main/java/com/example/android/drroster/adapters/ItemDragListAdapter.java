@@ -1,6 +1,7 @@
 package com.example.android.drroster.adapters;
 
 import android.support.v4.util.Pair;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.drroster.R;
-import com.example.android.drroster.fragments.FirstCallFragment;
+import com.example.android.drroster.fragments.DraggableListFragment;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.ArrayList;
@@ -19,16 +20,19 @@ import java.util.ArrayList;
 /**
  * Created by Nir on 4/3/2016.bugalbugala
  */
-public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter.ViewHolder> {
+public class ItemDragListAdapter extends DragItemAdapter<Pair<Long, String>, ItemDragListAdapter.ViewHolder> {
 
     private int mLayoutId;
     private int mGrabHandleId;
+    boolean mPickDateOption = false;
 
     //Constructor
-    public ItemAdapter(ArrayList<Pair<Long, String>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
+    public ItemDragListAdapter(ArrayList<Pair<Long, String>> list, int layoutId,
+                               int grabHandleId, boolean dragOnLongPress,boolean pickDateOption) {
         super(dragOnLongPress);
         mLayoutId = layoutId;
         mGrabHandleId = grabHandleId;
+        mPickDateOption = pickDateOption;
         setHasStableIds(true);
         setItemList(list);
     }
@@ -52,7 +56,7 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
         return mItemList.get(position).first;
     }
 
-    public class ViewHolder extends DragItemAdapter<Pair<Long, String>, ItemAdapter.ViewHolder>.ViewHolder {
+    public class ViewHolder extends DragItemAdapter<Pair<Long, String>, ItemDragListAdapter.ViewHolder>.ViewHolder {
         public ImageButton mDeleteImageButton;
 
         public CheckBox mCheckBox;
@@ -76,13 +80,13 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
 
                     //Check which index was selected by comparing to edit text
                     int i = 0;
-                    for (Pair temp : FirstCallFragment.mItemArray) {
+                    for (Pair temp : DraggableListFragment.mItemArray) {
                         if (temp.second.equals("" + mOldText)) {
                             break;
                         }
                         i++;
                     }
-                    FirstCallFragment.mItemArray.remove(i);
+                    DraggableListFragment.mItemArray.remove(i);
                     notifyDataSetChanged();
                 }
             });
@@ -111,7 +115,7 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
                         int i = 0;
                         Long mTempLong = -1l;
                         //Check which index was selected by comparing to old edit text
-                        for (Pair temp : FirstCallFragment.mItemArray) {
+                        for (Pair temp : DraggableListFragment.mItemArray) {
                             if (temp.second.equals("" + mOldText)) {
                                 mTempLong = (long) temp.first;
                                 break;
@@ -121,7 +125,7 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
 
                         //If long id was found set the data in the array.
                         if (mTempLong != -1) {
-                            FirstCallFragment.mItemArray.set(i, Pair.create(mTempLong, mText));
+                            DraggableListFragment.mItemArray.set(i, Pair.create(mTempLong, mText));
                         }
                     }
                 }
@@ -140,27 +144,32 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
                         //set check condition in is checked array
                         int i = 0;
                         //Check which index was selected by comparing to edit text
-                        for (Pair temp : FirstCallFragment.mItemArray) {
+                        for (Pair temp : DraggableListFragment.mItemArray) {
                             if (temp.second.equals("" + mCurrentName.getText())) {
                                 break;
                             }
                             i++;
                         }
-                        FirstCallFragment.mCheckedArray.set(i, isChecked);
+                        DraggableListFragment.mCheckedArray.set(i, isChecked);
                     }
                     //if name is currently being added check the array by the old name
                     else {
                         //set check condition in is checked array
                         int i = 0;
                         //Check which index was selected by comparing to edit text
-                        for (Pair temp : FirstCallFragment.mItemArray) {
+                        for (Pair temp : DraggableListFragment.mItemArray) {
                             if (temp.second.equals("" + mOldText)) {
                                 break;
                             }
                             i++;
                         }
                         //Sets the currently being added checkbox in final array
-                        FirstCallFragment.mCheckedArray.set(i, isChecked);
+                        DraggableListFragment.mCheckedArray.set(i, isChecked);
+                    }
+
+                    //if date option available
+                    if (mPickDateOption){
+                        Log.wtf("here", "--------------------------------------------");
                     }
                 }
             });
