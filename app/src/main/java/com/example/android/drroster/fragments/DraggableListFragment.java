@@ -30,6 +30,7 @@ public class DraggableListFragment extends Fragment {
     public DraggableListFragment() {
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,11 +90,13 @@ public class DraggableListFragment extends Fragment {
 
     public void setupListRecyclerView() {
         mDragListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        ItemDragListAdapter listAdapter = new ItemDragListAdapter(mItemArray, R.layout.list_item_draggable, R.id.image, false,pickDateOption);
+        ItemDragListAdapter listAdapter = new ItemDragListAdapter(mItemArray,
+                R.layout.list_item_draggable, R.id.image, false,pickDateOption,getContext());
         mDragListView.setAdapter(listAdapter, true);
         mDragListView.setCanDragHorizontally(false);
         mDragListView.setCustomDragItem(new MyDragItem(getContext(), R.layout.list_item_draggable));
     }
+
 
 
     private static class MyDragItem extends DragItem {

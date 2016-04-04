@@ -10,4 +10,12 @@
     <color name="colorAlmostWhite">#d0cdce</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBackgroundWhite">#FFFAFAFA</color>
+
+    <!-- Customize calendar colors -->
+    <color name="colorSelectedDayCalender">#84bfdc</color>
+    <color name="custom_Days">#494946</color>
+    <color name="custom_background_disabled">#f3f3f2</color>
+    <color name="custom_background">#FFFAFAFA</color>
+    <color name="custom_background_today">#eff5f8</color>
+    <color name="custom_selected">#c0e2ec</color>
 </resources>

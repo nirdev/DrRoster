@@ -25,4 +25,5 @@ dependencies {
     compile project(':DraggableListLib')
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.squareup:android-times-square:1.6.5@aar'
 }

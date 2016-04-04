@@ -1,7 +1,9 @@
 package com.example.android.drroster.adapters;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v4.util.Pair;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,12 @@ import android.widget.Toast;
 
 import com.example.android.drroster.R;
 import com.example.android.drroster.fragments.DraggableListFragment;
+import com.squareup.timessquare.CalendarPickerView;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Nir on 4/3/2016.bugalbugala
@@ -24,17 +29,30 @@ public class ItemDragListAdapter extends DragItemAdapter<Pair<Long, String>, Ite
 
     private int mLayoutId;
     private int mGrabHandleId;
+
     boolean mPickDateOption = false;
+
+    private CalendarPickerView mCalendarPickerView;
+    private AlertDialog theDialog;
+    Context mContext;
+    final Calendar nextMonth;
+    final Calendar lastMonth;
 
     //Constructor
     public ItemDragListAdapter(ArrayList<Pair<Long, String>> list, int layoutId,
-                               int grabHandleId, boolean dragOnLongPress,boolean pickDateOption) {
+                               int grabHandleId, boolean dragOnLongPress,boolean pickDateOption,Context context) {
         super(dragOnLongPress);
         mLayoutId = layoutId;
         mGrabHandleId = grabHandleId;
         mPickDateOption = pickDateOption;
+        mContext = context;
         setHasStableIds(true);
         setItemList(list);
+
+        nextMonth = Calendar.getInstance();
+        nextMonth.add(Calendar.MONTH, 1);
+        lastMonth = Calendar.getInstance();
+        lastMonth.add(Calendar.MONTH, -1);
     }
 
     @Override
@@ -167,14 +185,51 @@ public class ItemDragListAdapter extends DragItemAdapter<Pair<Long, String>, Ite
                         DraggableListFragment.mCheckedArray.set(i, isChecked);
                     }
 
-                    //if date option available
-                    if (mPickDateOption){
-                        Log.wtf("here", "--------------------------------------------");
+                    //if date option available && item is marked as checked
+                    if (mPickDateOption && isChecked) {
+
+                        showCalendarInDialog(mContext.getString(R.string.dialog_calerdar_title), R.layout.dialog_date_picker);
+                        mCalendarPickerView.init(lastMonth.getTime(), nextMonth.getTime())
+                                .inMode(CalendarPickerView.SelectionMode.RANGE)
+                                .withSelectedDate(new Date());
+
                     }
+
                 }
             });
         }
 
+        private void showCalendarInDialog(String title, int layoutResId) {
+
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            mCalendarPickerView = (CalendarPickerView) inflater.inflate(layoutResId, null, false);
+
+            theDialog = new AlertDialog.Builder(mContext) //
+                    .setTitle(title)
+                    .setView(mCalendarPickerView)
+                    .setNeutralButton(R.string.dialog_choose_date_button, new DialogInterface.OnClickListener() {
+                        @Override public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .create();
+            theDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialogInterface) {
+                    mCalendarPickerView.fixDialogDimens();
+                }
+            });
+
+
+//            // Setting dialog view at the bottom of the window
+//            Window window = theDialog.getWindow();
+//            window.setGravity(Gravity.BOTTOM);
+//            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+            theDialog.show();
+        }
+
+        //List item is clicked listener
         @Override
         public void onItemClicked(View view) {
             Toast.makeText(view.getContext(), "Item clicked", Toast.LENGTH_SHORT).show();
