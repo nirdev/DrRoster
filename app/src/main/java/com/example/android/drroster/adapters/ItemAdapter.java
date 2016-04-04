@@ -4,6 +4,8 @@ import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -15,13 +17,14 @@ import com.woxthebox.draglistview.DragItemAdapter;
 import java.util.ArrayList;
 
 /**
- * Created by Nir on 4/3/2016.
+ * Created by Nir on 4/3/2016.bugalbugala
  */
 public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter.ViewHolder> {
 
     private int mLayoutId;
     private int mGrabHandleId;
 
+    //Constructor
     public ItemAdapter(ArrayList<Pair<Long, String>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
         super(dragOnLongPress);
         mLayoutId = layoutId;
@@ -40,7 +43,7 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         String text = mItemList.get(position).second;
-        holder.mText.setText(text);
+        holder.mEditText.setText(text);
         holder.itemView.setTag(text);
     }
 
@@ -50,22 +53,31 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
     }
 
     public class ViewHolder extends DragItemAdapter<Pair<Long, String>, ItemAdapter.ViewHolder>.ViewHolder {
-        public EditText mText;
+        public ImageButton mDeleteImageButton;
+
+        public CheckBox mCheckBox;
+
+        public EditText mEditText;
+        public String mText;
+        public String mOldText;
 
         public ViewHolder(final View itemView) {
             super(itemView, mGrabHandleId);
-            mText = (EditText) itemView.findViewById(R.id.text);
 
-            //Delete Button was clicked
-            ImageButton mDeleteImageButton = (ImageButton) itemView.findViewById(R.id.delete_draggable_item);
+            mEditText = (EditText) itemView.findViewById(R.id.text);
+            mDeleteImageButton = (ImageButton) itemView.findViewById(R.id.delete_draggable_item);
+            mText = mEditText.getText().toString();
+            mCheckBox = (CheckBox) itemView.findViewById(R.id.checkbox_draggable_list_item);
+
+            //Delete Button was clicked listener
             mDeleteImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                   //Check which index was selected by comparing to edit text
+                    //Check which index was selected by comparing to edit text
                     int i = 0;
-                    for (Pair temp  : FirstCallFragment.mItemArray){
-                        if( temp.second.equals(""+mText.getText())){
+                    for (Pair temp : FirstCallFragment.mItemArray) {
+                        if (temp.second.equals("" + mOldText)) {
                             break;
                         }
                         i++;
@@ -74,10 +86,85 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, String>, ItemAdapter
                     notifyDataSetChanged();
                 }
             });
+
+            //Change Name Listener
+            mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    //User clicked on edit text
+                    if (hasFocus) {
+                        //Get text before edited
+                        mOldText = mEditText.getText().toString();
+
+                        //Set Cancel item visible
+                        mDeleteImageButton.setVisibility(View.VISIBLE);
+                    }
+                    //User leaved edit text
+                    else {
+                        //Set new text
+                        mText = mEditText.getText().toString();
+
+                        //Set delete button invisible
+                        mDeleteImageButton.setVisibility(View.GONE);
+
+                        //Set new value in the array
+                        int i = 0;
+                        Long mTempLong = -1l;
+                        //Check which index was selected by comparing to old edit text
+                        for (Pair temp : FirstCallFragment.mItemArray) {
+                            if (temp.second.equals("" + mOldText)) {
+                                mTempLong = (long) temp.first;
+                                break;
+                            }
+                            i++;
+                        }
+
+                        //If long id was found set the data in the array.
+                        if (mTempLong != -1) {
+                            FirstCallFragment.mItemArray.set(i, Pair.create(mTempLong, mText));
+                        }
+                    }
+                }
+            });
+
+            //CheckBox change listener
+            mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    //Check if no new name was signed to this person
+                    if (mOldText == null || mOldText.isEmpty()) {
+
+                        //Check name of currently checked box
+                        EditText mCurrentName = (EditText) itemView.findViewById(R.id.text);
+                        //set check condition in is checked array
+                        int i = 0;
+                        //Check which index was selected by comparing to edit text
+                        for (Pair temp : FirstCallFragment.mItemArray) {
+                            if (temp.second.equals("" + mCurrentName.getText())) {
+                                break;
+                            }
+                            i++;
+                        }
+                        FirstCallFragment.mCheckedArray.set(i, isChecked);
+                    }
+                    //if name is currently being added check the array by the old name
+                    else {
+                        //set check condition in is checked array
+                        int i = 0;
+                        //Check which index was selected by comparing to edit text
+                        for (Pair temp : FirstCallFragment.mItemArray) {
+                            if (temp.second.equals("" + mOldText)) {
+                                break;
+                            }
+                            i++;
+                        }
+                        //Sets the currently being added checkbox in final array
+                        FirstCallFragment.mCheckedArray.set(i, isChecked);
+                    }
+                }
+            });
         }
-
-
-
 
         @Override
         public void onItemClicked(View view) {

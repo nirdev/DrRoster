@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class FirstCallFragment extends Fragment {
 
     public static ArrayList<Pair<Long, String>> mItemArray;
+    public static ArrayList<Boolean> mCheckedArray;
     private DragListView mDragListView;
 
     View view;
@@ -37,6 +38,7 @@ public class FirstCallFragment extends Fragment {
 
         mDragListView = (DragListView) view.findViewById(R.id.drag_list_view_first_call);
         mDragListView.getRecyclerView().setVerticalScrollBarEnabled(true);
+        //Todo:Delete when finish list
         mDragListView.setDragListListener(new DragListView.DragListListener() {
             @Override
             public void onItemDragStarted(int position) {
@@ -51,25 +53,33 @@ public class FirstCallFragment extends Fragment {
             }
         });
 
-
         //TODO: take from database
         mItemArray = new ArrayList<>();
+        mCheckedArray = new ArrayList<>();
         for (int i = 0; i < 40; i++) {
             mItemArray.add(new Pair<>(Long.valueOf(i), "Item " + i));
-
+            mCheckedArray.add(false);
         }
+
 
 
         setupListRecyclerView();
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+
+       //TODo: handel DB here with gettag() - check this is best practice place to handle db in fragment life cycle
+        super.onDestroyView();
+    }
+
     public void setupListRecyclerView() {
         mDragListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.draggable_list_item, R.id.image, false);
+        ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.list_item_draggable, R.id.image, false);
         mDragListView.setAdapter(listAdapter, true);
         mDragListView.setCanDragHorizontally(false);
-        mDragListView.setCustomDragItem(new MyDragItem(getContext(), R.layout.draggable_list_item));
+        mDragListView.setCustomDragItem(new MyDragItem(getContext(), R.layout.list_item_draggable));
     }
 
 

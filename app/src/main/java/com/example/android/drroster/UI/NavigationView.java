@@ -11,7 +11,7 @@ import com.example.android.drroster.R;
 import com.example.android.drroster.activities.GenerateRosterActivity;
 
 /**
- * Created by Nir on 4/1/2016.
+ * Created by Nir on 4/1/2016.bububu
  */
 public class NavigationView extends RelativeLayout {
 
@@ -44,7 +44,7 @@ public class NavigationView extends RelativeLayout {
     private void initializeViews(Context context) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.navigation_view, this);
+        inflater.inflate(R.layout.view_navigation, this);
     }
 
 

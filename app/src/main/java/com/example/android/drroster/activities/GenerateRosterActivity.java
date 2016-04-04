@@ -44,7 +44,10 @@ public class GenerateRosterActivity extends AppCompatActivity {
                             ft.replace(R.id.fragment_place_holder_generate_roster, new ChooseMonthFragment());
                             break;
                         case FRAGMENT_PEOPLE_LIST_FIRST_CALL_INDEX:
-                            ft.replace(R.id.fragment_place_holder_generate_roster, new FirstCallFragment());
+                            ft.replace(R.id.fragment_place_holder_generate_roster, new FirstCallFragment(),"TAG HERE");
+                            break;
+                        case 2:
+                            ft.replace(R.id.fragment_place_holder_generate_roster, new FirstCallFragment(),"TAG HERE 2");
                             break;
                     }
                     // replace

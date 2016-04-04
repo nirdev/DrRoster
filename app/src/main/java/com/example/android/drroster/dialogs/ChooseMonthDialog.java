@@ -39,7 +39,7 @@ public class ChooseMonthDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.choose_month_dialog_layout);
+        setContentView(R.layout.dialog_choose_month_layout);
 
 
         //Inflate datePicker spinner from vew and sets current month and year
@@ -91,7 +91,9 @@ public class ChooseMonthDialog extends Dialog {
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
-                    ((View) dayPicker).setVisibility(View.GONE);
+                    if (((View) dayPicker) != null) {
+                        ((View) dayPicker).setVisibility(View.GONE);
+                    }
                 }
 
                 if (field.getName().equals("mMonthPicker") || field.getName().equals("mMonthSpinner")) {
@@ -102,7 +104,9 @@ public class ChooseMonthDialog extends Dialog {
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
-                    ((View) monthPicker).setVisibility(View.VISIBLE);
+                    if (((View) monthPicker) != null) {
+                        ((View) monthPicker).setVisibility(View.VISIBLE);
+                    }
                 }
 
                 if (field.getName().equals("mYearPicker") || field.getName().equals("mYearSpinner")) {
@@ -113,7 +117,9 @@ public class ChooseMonthDialog extends Dialog {
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
-                    ((View) yearPicker).setVisibility(View.VISIBLE);
+                    if (((View) yearPicker) != null) {
+                        ((View) yearPicker).setVisibility(View.VISIBLE);
+                    }
                 }
             }
         }
