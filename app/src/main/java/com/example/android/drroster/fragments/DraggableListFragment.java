@@ -18,11 +18,20 @@ import com.woxthebox.draglistview.DragItem;
 import com.woxthebox.draglistview.DragListView;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class DraggableListFragment extends Fragment {
 
-    public static ArrayList<Pair<Long, String>> mItemArray;
+    //Array for people names with id's for the draggable list
+    public static ArrayList<Pair<Long, String>> mPeopleArray;
+
+    //Array for checkbox
     public static ArrayList<Boolean> mCheckedArray;
+
+    //Array for "Leave Dates" array - each worker (first array) have it's own array of dates available
+    public static ArrayList<List<Date>> mLeaveDatesArray;
+
     private DragListView mDragListView;
     private boolean pickDateOption;
 
@@ -72,13 +81,16 @@ public class DraggableListFragment extends Fragment {
         });
 
         //TODO: take from database
-        mItemArray = new ArrayList<>();
+        mPeopleArray = new ArrayList<>();
         mCheckedArray = new ArrayList<>();
+        mLeaveDatesArray  =new ArrayList<>();
         for (int i = 0; i < 40; i++) {
-            mItemArray.add(new Pair<>(Long.valueOf(i), "Item " + i));
+            mPeopleArray.add(new Pair<>(Long.valueOf(i), "Item " + i));
             mCheckedArray.add(false);
+            mLeaveDatesArray.add(null);
         }
         setupListRecyclerView();
+
         return view;
     }
 
@@ -90,11 +102,11 @@ public class DraggableListFragment extends Fragment {
 
     public void setupListRecyclerView() {
         mDragListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        ItemDragListAdapter listAdapter = new ItemDragListAdapter(mItemArray,
-                R.layout.list_item_draggable, R.id.image, false,pickDateOption,getContext());
+        ItemDragListAdapter listAdapter = new ItemDragListAdapter(mPeopleArray,
+                R.layout.item_list_draggable, R.id.image, false,pickDateOption,getContext());
         mDragListView.setAdapter(listAdapter, true);
         mDragListView.setCanDragHorizontally(false);
-        mDragListView.setCustomDragItem(new MyDragItem(getContext(), R.layout.list_item_draggable));
+        mDragListView.setCustomDragItem(new MyDragItem(getContext(), R.layout.item_list_draggable));
     }
 
 
@@ -112,5 +124,6 @@ public class DraggableListFragment extends Fragment {
             dragView.setBackgroundColor(dragView.getResources().getColor(R.color.colorTransparent));
         }
     }
+
 
 }

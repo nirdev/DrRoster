@@ -31,6 +31,24 @@
         android:textSize="20sp"
         android:background="@null"/>
 
+    <TextView
+        android:id="@+id/days_item_draglist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="14sp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:textColor="@color/drag_list_view_choosen_dates"
+        android:background="@null"/>
+    <TextView
+        android:id="@+id/month_item_draglist"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/drag_list_view_choosen_dates"
+        android:background="@null"/>
+
     <!-- empty view to fill space from text to the end (delete button)-->
     <View
         android:id="@+id/view_dummy_draggable_item"

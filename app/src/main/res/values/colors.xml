@@ -11,6 +11,9 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBackgroundWhite">#FFFAFAFA</color>
 
+    <!-- Draggable List-->
+    <color name="drag_list_view_choosen_dates">#264557</color>
+
     <!-- Customize calendar colors -->
     <color name="colorSelectedDayCalender">#84bfdc</color>
     <color name="custom_Days">#494946</color>
